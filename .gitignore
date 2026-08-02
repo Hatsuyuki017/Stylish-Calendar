@@ -1,0 +1,25 @@
+# Build output — regenerate with ./macos/build.sh
+macos/build/
+
+# Palette generator scratch — regenerate with tools/gen_palettes.py
+tools/out/
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# iCloud Drive placeholders
+*.icloud
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Nothing here needs npm, but keep it out if anyone adds tooling
+node_modules/
+
+# Local Claude Code configuration, not part of the project
+.claude/

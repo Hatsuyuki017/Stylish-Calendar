@@ -1,0 +1,135 @@
+/* ============================================================
+   gadget.css — the desktop panel.
+
+   Same palette tokens as the app, at a quarter of the size. The whole
+   surface is draggable (the panel is movableByWindowBackground), so
+   anything clickable has to opt out with -webkit-app-region: no-drag.
+   ============================================================ */
+
+:root {
+  --paper:     var(--p-bg);
+  --surface:   color-mix(in srgb, var(--p-bg) 26%, #fff);
+  --surface-2: color-mix(in srgb, var(--p-bg) 58%, #fff);
+  --ink:       var(--p-ink);
+  --ink-52:    color-mix(in srgb, var(--p-ink) 52%, var(--surface));
+  --ink-38:    color-mix(in srgb, var(--p-ink) 38%, var(--surface));
+  --rule:      color-mix(in srgb, var(--p-ink) 16%, var(--surface));
+  --accent:    var(--p-a);
+
+  --heat-0: color-mix(in srgb, var(--p-ink) 9%,  var(--surface));
+  --heat-1: color-mix(in srgb, var(--p-a) 24%, var(--surface));
+  --heat-2: color-mix(in srgb, var(--p-a) 46%, var(--surface));
+  --heat-3: color-mix(in srgb, var(--p-a) 70%, var(--surface));
+  --heat-4: var(--p-a);
+
+  --display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --body:    'Spectral', Georgia, serif;
+  --mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+html, body { height: 100%; background: transparent; }
+
+body {
+  font-family: var(--body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+  user-select: none;
+  cursor: default;
+}
+
+.g {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 16px 13px;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  border: 1px solid color-mix(in srgb, var(--p-ink) 14%, transparent);
+  border-radius: 16px;
+  /* A little of the paper grain, so it reads as the same object as the app. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");
+}
+
+/* Pinned to the desktop it is scenery, so it recedes a little. */
+html[data-level="desktop"] .g { background: color-mix(in srgb, var(--surface) 84%, transparent); }
+
+.g__head { display: flex; align-items: baseline; gap: 7px; margin-bottom: 11px; }
+.g__mark { font-family: var(--mono); font-size: .54rem; letter-spacing: .18em;
+           text-transform: uppercase; color: var(--ink-38); }
+.g__pin { margin-left: auto; -webkit-app-region: no-drag; }
+
+.iconbtn {
+  background: none; border: 0; padding: 3px; border-radius: 4px; cursor: pointer;
+  color: var(--ink-38); display: flex; -webkit-app-region: no-drag;
+}
+.iconbtn:hover { color: var(--ink); background: var(--surface-2); }
+
+/* ---- today ---- */
+
+.g__today { display: flex; align-items: center; gap: 13px; }
+
+.g-ring { flex: none; }
+.g-ring circle { fill: none; stroke-width: 5; }
+.g-ring .track { stroke: var(--rule); }
+.g-ring .arc {
+  stroke: var(--accent); stroke-linecap: round;
+  transform: rotate(-90deg); transform-origin: 50% 50%;
+  transition: stroke-dashoffset .6s cubic-bezier(.2,.8,.2,1);
+}
+.g-ring text { font-family: var(--mono); font-size: 9px; fill: var(--ink-38); text-anchor: middle; }
+
+.g-today { min-width: 0; }
+.g-today__k { font-family: var(--mono); font-size: .54rem; letter-spacing: .14em;
+              text-transform: uppercase; color: var(--ink-38); }
+.g-today__v { font-family: var(--display); font-size: 1.62rem; font-weight: 600; line-height: 1.05;
+              letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.g-today__s { font-family: var(--mono); font-size: .58rem; color: var(--ink-52); margin-top: 2px; }
+
+/* ---- rows ---- */
+
+.g__rows { margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--rule);
+           display: flex; flex-direction: column; gap: 6px; }
+.g-row { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+.g-row__k { font-family: var(--mono); font-size: .56rem; letter-spacing: .1em;
+            text-transform: uppercase; color: var(--ink-38); min-width: 0;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.g-row__v { font-family: var(--display); font-size: .88rem; font-weight: 600;
+            white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ---- the strip ---- */
+
+/* The strip takes whatever height is left over, so the buttons below it can
+   never be pushed off however the panel is resized. */
+.g__strip { margin-top: 11px; padding-top: 10px; border-top: 1px solid var(--rule);
+            flex: 1; min-height: 52px; display: flex; }
+.g-grid { flex: 1; min-height: 0; display: grid;
+          grid-template-rows: repeat(7, minmax(0, 1fr)); grid-auto-flow: column;
+          grid-auto-columns: minmax(0, 1fr); gap: 2px; }
+.g-cell { border-radius: 1.5px; background: var(--heat-0); min-height: 0; }
+.g-cell[data-lvl="1"] { background: var(--heat-1); }
+.g-cell[data-lvl="2"] { background: var(--heat-2); }
+.g-cell[data-lvl="3"] { background: var(--heat-3); }
+.g-cell[data-lvl="4"] { background: var(--heat-4); }
+.g-cell.is-today { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.g-cell.is-void { background: transparent; }
+
+/* ---- foot ---- */
+
+.g__foot { margin-top: auto; padding-top: 11px; display: flex; align-items: center; gap: 7px; }
+.g-btn {
+  -webkit-app-region: no-drag;
+  flex: 1; padding: 6px 10px; cursor: pointer;
+  font-family: var(--mono); font-size: .6rem; letter-spacing: .08em;
+  border: 1px solid var(--accent); border-radius: 4px;
+  background: var(--accent); color: var(--surface);
+  transition: filter .15s;
+}
+.g-btn:hover { filter: brightness(1.12); }
+.g-btn--ghost { background: none; color: var(--ink-52); border-color: var(--rule); }
+.g-btn--ghost:hover { color: var(--ink); background: var(--surface-2); filter: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}

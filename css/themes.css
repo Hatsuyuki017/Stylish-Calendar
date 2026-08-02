@@ -1,0 +1,295 @@
+/* ============================================================
+   themes.css — 25 palettes for the Study Ledger
+   Switch the whole app with <html data-theme="kyoto">.
+   Source: Thomas Shang's Tufte-Style Book Template (24 palettes)
+           + the original "warm" default, ported from 26-Xi-quizbank.
+
+   A palette declares only seven raw tokens. Every other colour in
+   the app is derived from them in app.css via color-mix(), so a
+   palette can never be half-applied.
+   ============================================================ */
+
+:root {
+  --p-bg:  #f5f0eb;
+  --p-ink: #2C2C2C;
+  --p-a:   #8b1a1a;
+  --p-b:   #1a5c8b;
+  --p-c:   #1565c0;
+  --p-d:   #c41230;
+  --p-e:   #e65100;
+}
+
+/* 0. Warm (default) */
+[data-theme="warm"] {
+  --p-bg:  #f5f0eb;
+  --p-ink: #2C2C2C;
+  --p-a:   #8b1a1a;
+  --p-b:   #1a5c8b;
+  --p-c:   #1565c0;
+  --p-d:   #c41230;
+  --p-e:   #e65100;
+}
+
+/* 1. OUC Default */
+[data-theme="ouc-default"] {
+  --p-bg:  #EFF6FF;
+  --p-ink: #1E293B;
+  --p-a:   #1E3A8A;
+  --p-b:   #2563EB;
+  --p-c:   #4D85CA;
+  --p-d:   #818B95;
+  --p-e:   #1E293B;
+}
+
+/* 2. Brunneophobia */
+[data-theme="brunneophobia"] {
+  --p-bg:  #EED3B4;
+  --p-ink: #2A170E;
+  --p-a:   #564335;
+  --p-b:   #B4240F;
+  --p-c:   #9C6C3A;
+  --p-d:   #694626;
+  --p-e:   #2A170E;
+}
+
+/* 3. Van Dyke */
+[data-theme="van-dyke"] {
+  --p-bg:  #ECC2BC;
+  --p-ink: #3D2B27;
+  --p-a:   #443C5E;
+  --p-b:   #9B5C6C;
+  --p-c:   #6F687E;
+  --p-d:   #584D57;
+  --p-e:   #3D2B27;
+}
+
+/* 4. Back in Black */
+[data-theme="back-in-black"] {
+  --p-bg:  #F0D9E4;
+  --p-ink: #161315;
+  --p-a:   #4A3F4B;
+  --p-b:   #806C79;
+  --p-c:   #8D757E;
+  --p-d:   #57494F;
+  --p-e:   #161315;
+}
+
+/* 5. Belle of the Ball */
+[data-theme="belle-of-the-ball"] {
+  --p-bg:  #E2CBC0;
+  --p-ink: #2B3E04;
+  --p-a:   #76762C;
+  --p-b:   #CE4333;
+  --p-c:   #99634D;
+  --p-d:   #867063;
+  --p-e:   #354D04;
+}
+
+/* 6. Pine Tree */
+[data-theme="pine-tree"] {
+  --p-bg:  #EEC86F;
+  --p-ink: #2B2F22;
+  --p-a:   #A7581A;
+  --p-b:   #8F616C;
+  --p-c:   #836213;
+  --p-d:   #5B4B1A;
+  --p-e:   #2B2F22;
+}
+
+/* 7. Provence Blue */
+[data-theme="provence-blue"] {
+  --p-bg:  #AABCAF;
+  --p-ink: #232B3D;
+  --p-a:   #525C79;
+  --p-b:   #3C4553;
+  --p-c:   #515C5B;
+  --p-d:   #7E8C85;
+  --p-e:   #2D384F;
+}
+
+/* 8. Fresco Blue */
+[data-theme="fresco-blue"] {
+  --p-bg:  #A6E0F4;
+  --p-ink: #021F2E;
+  --p-a:   #044B66;
+  --p-b:   #09799E;
+  --p-c:   #347B96;
+  --p-d:   #1E5267;
+  --p-e:   #021F2E;
+}
+
+/* 9. Monet */
+[data-theme="monet"] {
+  --p-bg:  #F7F4D5;
+  --p-ink: #0A3323;
+  --p-a:   #105666;
+  --p-b:   #768A4F;
+  --p-c:   #AB7A71;
+  --p-d:   #635A4E;
+  --p-e:   #0A3323;
+}
+
+/* 10. Narcissus */
+[data-theme="narcissus"] {
+  --p-bg:  #DDD5C8;
+  --p-ink: #593119;
+  --p-a:   #AB6117;
+  --p-b:   #916D34;
+  --p-c:   #866D69;
+  --p-d:   #725245;
+  --p-e:   #6E3C1F;
+}
+
+/* 11. Roman Empire */
+[data-theme="roman-empire"] {
+  --p-bg:  #ECE8E1;
+  --p-ink: #581C5A;
+  --p-a:   #781428;
+  --p-b:   #B41E1E;
+  --p-c:   #4A6E41;
+  --p-d:   #9B8028;
+  --p-e:   #581C5A;
+}
+
+/* 12. Greece */
+[data-theme="greece"] {
+  --p-bg:  #F5F0E4;
+  --p-ink: #5A2A5C;
+  --p-a:   #3069AF;
+  --p-b:   #BC5226;
+  --p-c:   #628030;
+  --p-d:   #9B8028;
+  --p-e:   #5A2A5C;
+}
+
+/* 13. Kanagawa */
+[data-theme="kanagawa"] {
+  --p-bg:  #EDE9DE;
+  --p-ink: #1D1923;
+  --p-a:   #0D264C;
+  --p-b:   #1A4E84;
+  --p-c:   #6E8799;
+  --p-d:   #7A858D;
+  --p-e:   #1D1923;
+}
+
+/* 14. Starry Night */
+[data-theme="starry-night"] {
+  --p-bg:  #F0D044;
+  --p-ink: #142248;
+  --p-a:   #16321E;
+  --p-b:   #3060A5;
+  --p-c:   #4C7192;
+  --p-d:   #906626;
+  --p-e:   #142248;
+}
+
+/* 15. A Thousand Li */
+[data-theme="a-thousand-li"] {
+  --p-bg:  #DACBAA;
+  --p-ink: #1A3952;
+  --p-a:   #30694C;
+  --p-b:   #4D7859;
+  --p-c:   #486C80;
+  --p-d:   #945F24;
+  --p-e:   #234E70;
+}
+
+/* 16. And Quiet Flows the Don */
+[data-theme="and-quiet-flows-the-don"] {
+  --p-bg:  #8E7846;
+  --p-ink: #040404;
+  --p-a:   #263342;
+  --p-b:   #482715;
+  --p-c:   #241B11;
+  --p-d:   #2F2E2D;
+  --p-e:   #581A18;
+}
+
+/* 17. Cyberpunk Edgerunners */
+[data-theme="cyberpunk-edgerunners"] {
+  --p-bg:  #E1FF08;
+  --p-ink: #0E081C;
+  --p-a:   #0F2062;
+  --p-b:   #CD1423;
+  --p-c:   #EE1278;
+  --p-d:   #069D42;
+  --p-e:   #0E081C;
+}
+
+/* 18. Grand Budapest Hotel */
+[data-theme="grand-budapest-hotel"] {
+  --p-bg:  #F7EBD7;
+  --p-ink: #812F3A;
+  --p-a:   #805894;
+  --p-b:   #9E7A36;
+  --p-c:   #AD6C73;
+  --p-d:   #7A828E;
+  --p-e:   #8F3441;
+}
+
+/* 19. Renaissance Florence */
+[data-theme="renaissance-florence"] {
+  --p-bg:  #EEE4D0;
+  --p-ink: #553622;
+  --p-a:   #2E4676;
+  --p-b:   #36503C;
+  --p-c:   #AC5432;
+  --p-d:   #9A782A;
+  --p-e:   #553622;
+}
+
+/* 20. Soviet Avant-Garde */
+[data-theme="soviet-avant-garde"] {
+  --p-bg:  #E1D6CD;
+  --p-ink: #181412;
+  --p-a:   #C41C1C;
+  --p-b:   #32508A;
+  --p-c:   #76726C;
+  --p-d:   #926E17;
+  --p-e:   #181412;
+}
+
+/* 21. Constantinople */
+[data-theme="constantinople"] {
+  --p-bg:  #ECE1CF;
+  --p-ink: #1E3248;
+  --p-a:   #662041;
+  --p-b:   #324C3A;
+  --p-c:   #AA7032;
+  --p-d:   #9E7A22;
+  --p-e:   #1E3248;
+}
+
+/* 22. France */
+[data-theme="france"] {
+  --p-bg:  #E8DECD;
+  --p-ink: #28437C;
+  --p-a:   #B42028;
+  --p-b:   #8F6C94;
+  --p-c:   #7A7E84;
+  --p-d:   #807834;
+  --p-e:   #2C4A8A;
+}
+
+/* 23. Kyoto */
+[data-theme="kyoto"] {
+  --p-bg:  #EAE2D4;
+  --p-ink: #222842;
+  --p-a:   #505E44;
+  --p-b:   #6E5440;
+  --p-c:   #747E78;
+  --p-d:   #867975;
+  --p-e:   #222842;
+}
+
+/* 24. Siamese Dream */
+[data-theme="siamese-dream"] {
+  --p-bg:  #EEE2D0;
+  --p-ink: #2A4430;
+  --p-a:   #BC6928;
+  --p-b:   #7A756E;
+  --p-c:   #90732F;
+  --p-d:   #55605B;
+  --p-e:   #2A4430;
+}
