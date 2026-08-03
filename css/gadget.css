@@ -27,6 +27,12 @@
   --mono:    'IBM Plex Mono', ui-monospace, Menlo, monospace;
 }
 
+/* Dark paper flips the direction the surfaces step in — see app.css. */
+html[data-paper="dark"] {
+  --surface:   color-mix(in srgb, #fff 8%,  var(--p-bg));
+  --surface-2: color-mix(in srgb, #fff 15%, var(--p-bg));
+}
+
 * { box-sizing: border-box; margin: 0; }
 
 html, body { height: 100%; background: transparent; }

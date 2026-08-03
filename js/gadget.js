@@ -129,7 +129,7 @@
     Store.load();
     I18n.set(Store.settings.lang);
     Fonts.apply(I18n.current(), (Store.settings.fonts || {})[I18n.current()]);
-    document.documentElement.setAttribute('data-theme', Store.settings.theme || 'warm');
+    window.Theme.init();          // handles built-in and custom palettes alike
     document.documentElement.setAttribute('lang', I18n.locale(I18n.current()).bcp);
     render();
   }
@@ -145,7 +145,7 @@
     render: function () {
       I18n.set(Store.settings.lang);
       Fonts.apply(I18n.current(), (Store.settings.fonts || {})[I18n.current()]);
-      document.documentElement.setAttribute('data-theme', Store.settings.theme || 'warm');
+      window.Theme.init();
       render();
     }
   };

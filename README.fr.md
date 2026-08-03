@@ -265,6 +265,38 @@ pleine à gauche et un texte à l’encre. C’est ce qui garde les 25 jeux lisi
 compris les plus bruyants. Chaque graphique associe la couleur à une étiquette
 écrite pour la même raison.
 
+### Lire une palette
+
+Chaque carte porte une accroche d’une ligne et un **ⓘ** qui ouvre la page propre à
+la palette : la bande complète des teintes, un court récit de leur provenance, et
+un tableau des sept jetons avec leurs valeurs hexadécimales et leur contraste sur
+le papier. Les lignes portent *vos* noms de catégories : la page vous dit donc
+quelle teinte est celle de votre travail de cours, et non « couleur de catégorie 3 ».
+
+Les descriptions sont adaptées des notes « Colour Philosophy » et « Design logic »
+du [gabarit de livre à la Tufte de Thomas Shang](https://github.com/Hatsuyuki017/Thomas-Tufte-Style-Book-Template),
+et sont écrites dans les huit langues d’interface — 200 notes dans
+[js/palette-notes.js](js/palette-notes.js). Une langue sans note pour une palette
+retombe sur l’anglais : une nouvelle palette n’a donc strictement besoin que de la
+sienne en anglais.
+
+### Créer la vôtre
+
+**Palette → Créer la vôtre** ouvre un éditeur pour ces mêmes sept jetons : le
+papier, l’encre et cinq teintes de catégorie, chacun avec un sélecteur et un champ
+hexadécimal. Toute l’application se repeint pendant que vous faites glisser, et
+chaque ligne affiche son contraste sur le papier face aux planchers qu’utilise le
+générateur — 7:1 pour l’encre, 3:1 pour une teinte de catégorie — de sorte qu’un
+mauvais choix se voit avant d’être gardé. Vos palettes se placent au-dessus de
+celles fournies, restent modifiables ou supprimables, et voyagent dans l’export JSON.
+
+Comme une palette possède aussi le papier, **une palette sombre donne une
+application sombre**. Les surfaces dérivées vont normalement du papier vers le
+blanc ; lorsque la luminance du papier passe sous 0,15, elles vont dans l’autre
+sens, et les panneaux se détachent du fond au lieu de s’y enfoncer. Les 25 palettes
+fournies sont toutes claires — la plus sombre, Le Don paisible, est à 0,196 — donc
+rien de livré ne change.
+
 ---
 
 ## Clavier

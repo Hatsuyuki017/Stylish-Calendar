@@ -71,6 +71,8 @@ final class SelfTest: NSObject, NSApplicationDelegate, WebHostDelegate {
             cats: window.Store ? window.Store.categories().length : -1,
             langs: window.I18n ? window.I18n.LOCALES.length : -1,
             plans: window.Fonts ? Object.keys(window.Fonts.PLANS).length : -1,
+            notes: window.PALETTE_NOTES ? Object.keys(window.PALETTE_NOTES).length : -1,
+            palettes: window.PALETTES ? window.PALETTES.length : -1,
             views: document.querySelectorAll('.nav__item').length,
             rendered: document.getElementById('view').innerHTML.length
           });
@@ -89,6 +91,9 @@ final class SelfTest: NSObject, NSApplicationDelegate, WebHostDelegate {
             self.check("4 typographic scripts", (d["plans"] as? Int ?? 0) == 4, "\(d["plans"] ?? "?")")
             self.check("5 views in the sidebar", (d["views"] as? Int ?? 0) == 5, "\(d["views"] ?? "?")")
             self.check("a view actually rendered", (d["rendered"] as? Int ?? 0) > 500, "\(d["rendered"] ?? "?")")
+            self.check("25 palettes with notes in 8 languages",
+                       (d["palettes"] as? Int ?? 0) == 25 && (d["notes"] as? Int ?? 0) == 8,
+                       "\(d["palettes"] ?? "?") palettes / \(d["notes"] ?? "?") languages")
             self.checkRoundTrip()
         }
     }

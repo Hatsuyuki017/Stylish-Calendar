@@ -60,6 +60,27 @@
   --radius: 3px;
 }
 
+/* ---- dark paper ----
+   Every surface above lifts the paper most of the way toward white, which is
+   right for all 25 built-in palettes and inverts badly on a dark one. Theme
+   sets data-paper="dark" when the paper's luminance is low, and the surfaces
+   then step *up* from the paper by a little instead. Same tokens, same rules —
+   only the direction changes, so a custom dark palette is a first-class
+   citizen rather than a broken light one. */
+[data-paper="dark"] {
+  --surface:   color-mix(in srgb, #fff 7%,  var(--p-bg));
+  --surface-2: color-mix(in srgb, #fff 13%, var(--p-bg));
+  --surface-3: color-mix(in srgb, #fff 21%, var(--p-bg));
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, .45);
+  --shadow-2: 0 4px 18px -6px rgba(0, 0, 0, .6);
+  --shadow-3: 0 24px 60px -18px rgba(0, 0, 0, .75);
+}
+[data-paper="dark"] .spine { background: color-mix(in srgb, #fff 4%, var(--p-bg)); }
+[data-paper="dark"] .nav__item:hover { background: color-mix(in srgb, #fff 10%, var(--p-bg)); }
+/* The paper grain multiplies, which can only darken; on dark paper it lifts. */
+[data-paper="dark"] body::after { mix-blend-mode: screen; opacity: .3; }
+[data-paper="dark"] .sheet::backdrop { background: rgba(0, 0, 0, .6); }
+
 /* ============================================================
    base
    ============================================================ */
@@ -768,7 +789,13 @@ select:disabled { color: var(--ink-52); background: var(--surface-2);
 
 .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(184px, 1fr)); gap: 12px; }
 
+/* Each card carries the palette, an "i" for its description page, and a one
+   line teaser drawn from that description. */
+.pcard-wrap { position: relative; display: flex; }
+
 .pcard {
+  flex: 1; min-width: 0;
+  display: flex; flex-direction: column;
   border: 1px solid var(--rule-firm);
   border-radius: var(--radius);
   padding: 0; overflow: hidden;
@@ -777,15 +804,63 @@ select:disabled { color: var(--ink-52); background: var(--surface-2);
   transition: transform .18s cubic-bezier(.2,.8,.2,1), box-shadow .18s, border-color .18s;
 }
 .pcard:hover { transform: translateY(-3px); box-shadow: var(--shadow-2); border-color: var(--ink-52); }
-.pcard.is-on { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+.pcard.is-on, .pcard-wrap.is-on .pcard { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
 
-.pcard__chips { display: flex; height: 46px; }
+.pcard__chips { display: flex; height: 46px; flex: none; }
 .pcard__chips i { flex: 1; }
 .pcard__chips i:first-child { flex: 1.5; }
-.pcard__foot { display: flex; align-items: baseline; gap: 7px; padding: 8px 11px 10px; border-top: 1px solid var(--rule); }
+.pcard__foot { display: flex; align-items: baseline; gap: 7px; padding: 8px 11px 6px; border-top: 1px solid var(--rule); }
 .pcard__n { font-family: var(--mono); font-size: .58rem; color: var(--ink-38); }
-.pcard__name { font-size: .84rem; font-weight: 500; }
+.pcard__name { font-size: .84rem; font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .pcard__tick { margin-left: auto; color: var(--accent); font-size: .8rem; }
+.pcard__teaser {
+  padding: 0 11px 10px; font-size: .72rem; line-height: 1.45; color: var(--ink-38);
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pcard__teaser:empty { display: none; }
+
+.pcard__info {
+  position: absolute; top: 6px; right: 6px; z-index: 2;
+  width: 20px; height: 20px; border-radius: 50%; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--p-ink) 22%, transparent);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  color: var(--ink-70);
+  font-family: var(--display); font-size: .7rem; font-style: italic; line-height: 1;
+  opacity: 0; transition: opacity .16s, background .16s;
+}
+.pcard-wrap:hover .pcard__info, .pcard__info:focus-visible { opacity: 1; }
+.pcard__info:hover { background: var(--surface); color: var(--ink); }
+
+/* the "make your own" entrance */
+.pcard--new {
+  align-items: flex-start; justify-content: center; gap: 5px;
+  padding: 14px 12px; border-style: dashed; background: none; min-height: 118px;
+}
+.pcard--new:hover { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 5%, transparent); }
+.pcard--new__plus { font-family: var(--display); font-size: 1.5rem; line-height: 1; color: var(--accent); }
+.pcard--new .pcard__teaser { padding: 0; }
+
+/* description page */
+.pstrip { display: flex; height: 54px; border-radius: var(--radius); overflow: hidden; margin-bottom: 14px; }
+.pstrip i { flex: 1; }
+.pnote { font-size: .95rem; line-height: 1.6; margin-bottom: 16px; }
+.ptable td { padding: 6px 10px; }
+.pswatch { display: inline-block; width: 13px; height: 13px; border-radius: 2px; margin-right: 9px;
+           vertical-align: -2px; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--p-ink) 22%, transparent); }
+.pratio { font-family: var(--mono); font-size: .68rem; color: var(--ink-38); }
+.pratio.is-low { color: #b3261e; }
+
+/* the editor */
+.prows { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.prow { display: grid; grid-template-columns: 34px minmax(0, 1fr) 86px 56px; align-items: center; gap: 10px; }
+.prow input[type="color"] {
+  width: 34px; height: 26px; padding: 2px; border: 1px solid var(--rule-firm);
+  border-radius: var(--radius); background: var(--surface); cursor: pointer;
+}
+.prow__k { font-size: .84rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.prow__hex { padding: 5px 8px; font-size: .74rem; text-transform: uppercase; }
+.prow__r { font-family: var(--mono); font-size: .66rem; color: var(--ink-38); text-align: right; }
+.prow__r.is-low { color: #b3261e; }
 
 /* ============================================================
    dialogs, tooltip, toast

@@ -261,6 +261,38 @@ ist eine blasse Tönung seiner Kategoriefarbe mit einem satten Balken links und 
 in Tinte. Genau das hält alle 25 Schemata lesbar, auch die lauten. Jedes Diagramm
 stellt der Farbe aus demselben Grund eine geschriebene Beschriftung zur Seite.
 
+### Ein Farbschema nachlesen
+
+Jede Karte trägt eine einzeilige Ankündigung und ein **ⓘ**, das die eigene Seite des
+Schemas öffnet: den vollständigen Farbstreifen, eine kurze Herkunftsgeschichte der
+Farben und eine Tabelle aller sieben Tokens mit Hex-Werten und ihrem Kontrast zum
+Papier. Die Zeilen tragen *deine* Kategorienamen — die Seite sagt dir also, welcher
+Ton die Farbe deiner Lehrveranstaltungen ist, statt „Kategoriefarbe 3“.
+
+Die Beschreibungen sind den Abschnitten „Colour Philosophy“ und „Design logic“ aus
+[Thomas Shangs Buchvorlage im Tufte-Stil](https://github.com/Hatsuyuki017/Thomas-Tufte-Style-Book-Template)
+nachempfunden und liegen in allen acht Oberflächensprachen vor — 200 Notizen in
+[js/palette-notes.js](js/palette-notes.js). Fehlt einer Sprache die Notiz zu einem
+Schema, fällt sie auf Englisch zurück; ein neues Schema braucht streng genommen nur
+die englische.
+
+### Ein eigenes anlegen
+
+**Farbschema → Eigenes anlegen** öffnet einen Editor für ebendiese sieben Tokens:
+Papier, Tinte und fünf Kategoriefarben, jeweils mit Farbwähler und Hex-Feld. Die
+ganze App färbt sich um, während du ziehst, und jede Zeile zeigt ihren Kontrast zum
+Papier neben den Grenzwerten, die auch der Generator anlegt — 7:1 für die Tinte,
+3:1 für eine Kategoriefarbe. So sieht man eine schlechte Wahl, bevor man sie behält.
+Deine Schemata stehen über den mitgelieferten, bleiben änderbar und löschbar und
+reisen im JSON-Export mit.
+
+Da ein Schema auch das Papier bestimmt, **ergibt ein dunkles Schema eine dunkle App**.
+Die abgeleiteten Flächen gehen normalerweise vom Papier Richtung Weiß; sinkt die
+Leuchtdichte des Papiers unter 0,15, gehen sie in die andere Richtung, und die Panels
+heben sich vom Grund ab, statt darin zu versinken. Alle 25 mitgelieferten Schemata
+sind hell — das dunkelste, Der stille Don, liegt bei 0,196 —, es ändert sich also
+nichts am Bestand.
+
 ---
 
 ## Tastatur

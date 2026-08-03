@@ -497,15 +497,26 @@
      utility sheet (settings / help)
      ============================================================ */
 
-  var util;
+  var util, sheetDismiss = null;
 
-  function openSheet(title, body, foot, onMount) {
+  /**
+   * The shared sheet. `onDismiss` runs only when the sheet is closed by the
+   * user (Esc, ✕, the backdrop) rather than by code, which is how the palette
+   * editor knows to drop its live preview.
+   */
+  function openSheet(title, body, foot, onMount, onDismiss) {
     U.$('#utilSheetTitle').textContent = title;
     U.$('#utilSheetBody').innerHTML = body;
     U.$('#utilSheetFoot').innerHTML = foot || '<span class="spacer"></span>' +
       '<button class="btn btn--ghost" type="button" data-close>' + U.esc(T('ui.close')) + '</button>';
-    util.showModal();
+    sheetDismiss = onDismiss || null;
+    if (!util.open) util.showModal();
     if (onMount) onMount(util);
+  }
+
+  function closeSheet() {
+    sheetDismiss = null;      // closed deliberately; the caller cleans up itself
+    util.close();
   }
 
   function section(title, inner) {
@@ -786,7 +797,12 @@
     U.$('#btnSettings').addEventListener('click', openSettings);
     U.$('#btnHelp').addEventListener('click', openHelp);
 
-    U.on(util, 'click', '[data-close]', function () { util.close(); });
+    U.on(util, 'click', '[data-close]', function () { closeSheet(); });
+    util.addEventListener('close', function () {
+      var fn = sheetDismiss;
+      sheetDismiss = null;
+      if (fn) fn();
+    });
 
     window.addEventListener('hashchange', function () { readHash(); render(); });
 
@@ -858,6 +874,7 @@
     render: render, go: go, goDay: goDay, setLang: setLang, setFontPlan: setFontPlan,
     newEntry: newEntry, editEntry: editEntry,
     tip: tip, tipOff: tipOff, toast: toast,
+    openSheet: openSheet, closeSheet: closeSheet,
     state: state
   };
 

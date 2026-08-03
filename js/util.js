@@ -151,6 +151,37 @@
 
   function clamp(v, lo, hi) { return v < lo ? lo : v > hi ? hi : v; }
 
+  /* ---------- colour ---------- */
+
+  function rgb(hex) {
+    var h = String(hex).replace('#', '');
+    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    return [parseInt(h.slice(0, 2), 16) || 0,
+            parseInt(h.slice(2, 4), 16) || 0,
+            parseInt(h.slice(4, 6), 16) || 0];
+  }
+
+  /** WCAG relative luminance. */
+  function luminance(hex) {
+    var c = rgb(hex).map(function (v) {
+      v /= 255;
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+
+  /** WCAG contrast ratio, 1–21. The same rule tools/gen_palettes.py applies. */
+  function contrast(a, b) {
+    var x = luminance(a), y = luminance(b);
+    return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+  }
+
+  /** Normalise anything an <input type="color"> might hand back. */
+  function hex(v) {
+    var c = rgb(v);
+    return '#' + c.map(function (n) { return pad2(n.toString(16)).slice(-2); }).join('').toUpperCase();
+  }
+
   /** Round to the nearest `step` minutes. */
   function snap(v, step) { return Math.round(v / step) * step; }
 
@@ -187,6 +218,7 @@
     monthName: monthName, dowName: dowName, fmtDay: fmtDay, fmtDayLong: fmtDayLong,
     hhmm: hhmm, mins: mins, clockLabel: clockLabel, dur: dur, hours: hours,
     esc: esc, id: id, clamp: clamp, snap: snap,
+    rgb: rgb, luminance: luminance, contrast: contrast, hex: hex,
     $: $, $$: $$, on: on, debounce: debounce
   };
 })(window);

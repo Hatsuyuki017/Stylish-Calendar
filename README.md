@@ -245,6 +245,35 @@ block is a pale tint of its category colour with a solid bar down the left and
 ink-coloured text. That is what keeps all 25 schemes legible, including the loud
 ones. Every chart pairs colour with a written label for the same reason.
 
+### Reading about a palette
+
+Every card carries a one-line teaser and an **ⓘ** that opens the palette's own
+page: the full swatch strip, a short account of where the colours come from, and
+a table of all seven tokens with their hex values and their contrast against the
+paper. The rows are labelled with *your* category names, so the page tells you
+which hue is your Course Work colour rather than "category colour 3".
+
+The descriptions are adapted from the Colour Philosophy and Design Logic notes in
+[Thomas Shang's Tufte-Style Book Template](https://github.com/Hatsuyuki017/Thomas-Tufte-Style-Book-Template),
+and are written in all eight interface languages — 200 notes in
+[js/palette-notes.js](js/palette-notes.js). A language with no note for a palette
+falls back to English, so a new palette strictly needs only its English one.
+
+### Making your own
+
+**Palette → Make your own** opens an editor for the same seven tokens: paper,
+ink, and five category hues, each with a colour well and a hex field. The whole
+app repaints as you drag, and each row shows its contrast against the paper
+against the floors the generator uses — 7:1 for ink, 3:1 for a category hue — so
+you can see a choice going wrong before you keep it. Your palettes sit above the
+built-ins, can be edited or deleted later, and travel in the JSON export.
+
+Because a palette owns the paper too, **a dark palette gives you a dark app**.
+The derived surfaces normally step from the paper toward white; when the paper's
+luminance drops below 0.15 they step the other way instead, so panels lift off
+the background rather than sinking into it. All 25 built-ins are light — the
+darkest, And Quiet Flows the Don, sits at 0.196 — so nothing shipped changes.
+
 ---
 
 ## Keyboard

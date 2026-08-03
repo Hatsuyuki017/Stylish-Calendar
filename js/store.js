@@ -85,6 +85,7 @@
         goal: 240            // daily target, minutes
       },
       semesters: seedSemesters(),
+      palettes: [],          // the user's own palettes
       categories: seedCategories(),
       entries: []
     };
@@ -126,6 +127,7 @@
     var base = defaults();
     d.settings = Object.assign(base.settings, d.settings || {});
     if (!Array.isArray(d.semesters) || !d.semesters.length) d.semesters = base.semesters;
+    if (!Array.isArray(d.palettes)) d.palettes = [];
 
     d.categories = (d.categories || []).map(function (c) {
       c.activities = c.activities || [];
@@ -481,6 +483,38 @@
     return Object.keys(minutesByDay(fromKey, toKey)).length;
   }
 
+  /* ---------------- custom palettes ---------------- */
+
+  /**
+   * A palette the user made: seven raw tokens, exactly what themes.css
+   * declares for a built-in one.
+   *   { id, name, bg, ink, cats: [5 hex] }
+   */
+  function palettes() { return db.palettes; }
+
+  function palette(id) {
+    for (var i = 0; i < db.palettes.length; i++) {
+      if (db.palettes[i].id === id) return db.palettes[i];
+    }
+    return null;
+  }
+
+  function putPalette(p) {
+    var existing = p.id ? palette(p.id) : null;
+    if (existing) Object.assign(existing, p);
+    else { p.id = p.id || 'own-' + U.id(); db.palettes.push(p); }
+    save();
+    return p;
+  }
+
+  function removePalette(id) {
+    db.palettes = db.palettes.filter(function (p) { return p.id !== id; });
+    // Fall back to the default rather than leaving the app pointing at a
+    // palette that no longer exists.
+    if (db.settings.theme === id) db.settings.theme = 'warm';
+    save();
+  }
+
   /* ---------------- periods ---------------- */
 
   function semesters() { return db.semesters; }
@@ -579,6 +613,7 @@
     minutesOf: minutesOf, minutesByDay: minutesByDay, breakdown: breakdown,
     itemRows: itemRows, activityRows: activityRows, activeDays: activeDays,
     semesters: semesters, semesterAt: semesterAt,
+    palettes: palettes, palette: palette, putPalette: putPalette, removePalette: removePalette,
     periodRange: periodRange, previousRange: previousRange,
     exportJSON: exportJSON, importJSON: importJSON, reset: reset
   };
