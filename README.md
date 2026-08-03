@@ -1,5 +1,7 @@
 # Study Ledger
 
+**English** · [简体中文](README.zh-Hans.md) · [繁體中文](README.zh-Hant.md) · [日本語](README.ja.md) · [Français](README.fr.md) · [Deutsch](README.de.md)
+
 A calendar for keeping track of where study time actually goes — a timetable you
 block sessions onto, a GitHub-style year heatmap, and a time-consumption report
 for any day, week, month, year or semester.
@@ -312,9 +314,8 @@ every language, no overflow at 430 px).
 ## Settings
 
 Interface language, typographic plan, week start, the hour window the grid opens
-on, drag snapping
-(5/10/15/30 min), a daily goal, the heatmap's saturation point, and your semester
-dates. Semesters are a hand-kept list; the Statistics view's **Semester** scope
+on, drag snapping (5/10/15/30 min), a daily goal, the heatmap's saturation point,
+and your semester dates. Semesters are a hand-kept list; the Statistics view's **Semester** scope
 reads from it and the ‹ › arrows walk through it.
 
 ---
